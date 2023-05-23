@@ -1,7 +1,23 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const sequelize = require('./config/connection');
+// const sequelize = require('./config/connection');
+
+// sequelize.ConnectionError(err => {
+//   if (err) throw err;
+//   console.log('connected' + sequelize.threadId);
+//   afterConnection();
+// });
+
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'books_db'
+  },
+  console.log(`Connected to the _db database.`)
+);
 
 //start page with options
 function startPage() {
@@ -77,14 +93,28 @@ function startPage() {
                   break;
 
                 case "EXIT":
-                  console.log("Thnaks for using Employee Tracker! See you Later!")
+                  console.log("Thanks for using Employee Tracker! See you Later!")
                   EXIT();
                   
             }
-        
-        });
+          });
     
-    }
+};
+
+startPage();
+
+viewEmployees() {
+  const sql = `SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, department.name,  `
+}
+
+viewRoles() {
+  
+}
+
+viewDepartments() {
+  
+}
+
 
 //Presented with options: View all departments, view all roles, view all employees, add a department, add a role, add an employee. and update an employee role
 //Department: Formated Table showing department names and department IDs

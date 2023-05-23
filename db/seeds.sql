@@ -4,9 +4,6 @@ VALUES ("Finance"),
        ("IT"),
        ("Engineering");
 
-
--- 
-
 INSERT INTO role (title, salary, department_id)
 VALUES ("Market Analyst", "63000", 2),
        ("IT Support Specialist", "49000", 3),
