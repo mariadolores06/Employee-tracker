@@ -21,14 +21,14 @@ function startPage() {
             name: "yourPick",
             message: "What would you like to do?",
             choices: [
-                "View All Employees",
-                "Add Employee",
-                "Update Employee Role",
-                "View All Roles",
-                "Add a Role",
-                "View All Departments",
-                "Add Department",
-                "EXIT"
+                `View All Employees`,
+                `Add Employee`,
+                `Update Employee Role`,
+                `View All Roles`,
+                `Add a Role`,
+                `View All Departments`,
+                `Add Department`,
+                `EXIT`
                 ]
               })
 }
@@ -38,19 +38,19 @@ function start() {
       .prompt(startPage)
       .then((answer) => {
 
-        if (answer.yourPick === "View All Employees") {
+        if (answer.yourPick === `View All Employees`) {
             viewEmployees()
-        } else if (answer.yourPick === "Add Employee") {
+        } else if (answer.yourPick === `Add Employee`) {
             addEmployee()
-        } else if (answer.yourPick === "Update Employee Role") {
+        } else if (answer.yourPick === `Update Employee Role`) {
             updateEmployeeRole()
-        } else if (answer.yourPick === "View All Roles") {  
+        } else if (answer.yourPick === `View All Roles`) {  
             viewRoles()
-        } else if (answer.yourPick === "Add a Role") {
+        } else if (answer.yourPick === `Add a Role`) {
             addRole()
-        } else if (answer.yourPick === "View All Departments") {
+        } else if (answer.yourPick === `View All Departments`) {
             viewDepartments()
-        } else if (answer.yourPick === "Add Department") {
+        } else if (answer.yourPick === `Add Department`) {
             addDepartment()
         } else {
             console.log("Thanks for using Employee Tracker! See you Later!")
@@ -61,14 +61,14 @@ function start() {
 
 
 function viewEmployees() {
-  db.query("SELECT * FROM employee", function(err, result) {
+  db.query(`SELECT * FROM employee`, function(err, result) {
     console.table(result);
     start();
   });
 }
 
 function roleChoices() {
-  return db.promise().query("SELECT * from role")
+  return db.promise().query(`SELECT * from role`)
 }
 
 function addEmployee() {
@@ -76,12 +76,12 @@ function addEmployee() {
     .prompt([
       {
         type: "input",
-        message: "What is the first name of the employee you would like to add?",
+        message: `What is the first name of the employee you would like to add?`,
         name: "fistName",
       },
       {
         type: "input",
-        message: "What is the employee last name ?",
+        message: `What is the employee last name ?`,
         name: "lastName",
       }, ])
 
@@ -94,13 +94,13 @@ function addEmployee() {
     .prompt ([
       {
         type: "list",
-        message: "What is the employees role?",
+        message: `What is the employees role?`,
         name: "employeeRole",
         choices: rolChoices
       },
       {
         type: "list",
-        message: "Do they have a manager? If so, please choose one",
+        message: `Do they have a manager? If so, please choose one`,
         name: "employeeManager",
         choices: rolChoices
       },
@@ -118,7 +118,7 @@ function addEmployee() {
 }
 
 function employeeChoices() {
-  return db.promise().query("SELECT * from employee")
+  return db.promise().query(`SELECT * from employee`)
 }
 
 function updateEmployeeRole() {
@@ -129,7 +129,7 @@ function updateEmployeeRole() {
       {
         type: "list",
         name: "employeeID",
-        message: "who is the employee whos role you wish to update?",
+        message: `who is the employee whos role you wish to update?`,
         choices: eChoices
       }, ]) 
 
@@ -141,12 +141,12 @@ function updateEmployeeRole() {
       .prompt([
         {
           type: "list",
-          message: "What is the employees new role?",
+          message: `What is the employees new role?`,
           name: "newRole",
           choices: rolChoices
         }, ])
       .then((answer) => {
-        db.query("UPDATE employee SET role_id = ? where id = ?", [answers.newRole, employee]) 
+        db.query(`UPDATE employee SET role_id = ? where id = ?`, [answers.newRole, employee]) 
           console.log("Success! Role has been updated.")
             start();
           })
@@ -156,14 +156,14 @@ function updateEmployeeRole() {
 }
 
 function viewRoles() {
-  db.query("SELECT * FROM role", function (err, result) {
+  db.query(`SELECT * FROM role`, function (err, result) {
     console.table(result);
     start();
   });
 }
 
 function departmentChoices() {
-  return db.promise().query("SELECT * from department")
+  return db.promise().query(`SELECT * from department`)
 }
 
 function addRole() {
@@ -171,12 +171,12 @@ function addRole() {
     .prompt([
       {
         type: "input",
-        message: "What is the title of the role you would like to add?",
+        message: `What is the title of the role you would like to add?`,
         name: "roleTitle",
       },
       {
         type: "input",
-        message: "What is the salary of the role you would like to add?",
+        message: `What is the salary of the role you would like to add?`,
         name: "roleSalary",
       }, ])
 
@@ -189,7 +189,7 @@ function addRole() {
     .prompt ([
       {
         type: "list",
-        message: "What is the department of the role you would like to add?",
+        message: `What is the department of the role you would like to add?`,
         name: "roleDepartment",
         choices: depChoices 
       },
@@ -206,7 +206,7 @@ function addRole() {
 }
 
 function viewDepartments() {
-  db.query("SELECT * FROM department order by id", function(err, result) {
+  db.query(`SELECT * FROM department order by id`, function(err, result) {
     console.table(result);
     start();
   });
@@ -217,7 +217,7 @@ function addDepartment() {
     .prompt([
       {
         type: "input",
-        message: "What is the name of the department you would like to add?",
+        message: `What is the name of the department you would like to add?`,
         name: "departmentName",
       },
     ])
